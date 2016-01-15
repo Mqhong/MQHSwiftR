@@ -9,7 +9,7 @@
 import UIKit
 import SwiftR
 
-@objc protocol MQHSwiftRDelegate{
+@objc public protocol MQHSwiftRDelegate{
     /**!
      登录成功的回调
      
@@ -156,7 +156,7 @@ public enum MQHSwiftRState{
 }
 
 
-class MQHSwiftR: NSObject {
+public class MQHSwiftR: NSObject {
 
     var MQHSwiftRDaostate:MQHSwiftRState!
     weak var delegate : MQHSwiftRDelegate?
@@ -165,7 +165,7 @@ class MQHSwiftR: NSObject {
     /**
      初始化连接池，并监听回调
      */
-    func _initMQHSwiftR(urlStr urlStr:String){
+  public  func _initMQHSwiftR(urlStr urlStr:String){
         
         hubConnection = SwiftR.connect(urlStr) { [weak self] connection in
             
@@ -363,7 +363,7 @@ class MQHSwiftR: NSObject {
     /**
     断开或者重新连接
     */
-    func BreakOrConnectTheConnection(){
+   public func BreakOrConnectTheConnection(){
         
         let state:String = String(MQHSwiftRDaostate)
         
@@ -402,7 +402,7 @@ class MQHSwiftR: NSObject {
     /**
     心跳
     */
-    func heart(){
+    public func heart(){
         chatHub.invoke("heart", arguments: [])
     }
     
@@ -414,7 +414,7 @@ class MQHSwiftR: NSObject {
     message_id //消息 id chat_session_id//聊天会话 id
     }
     */
-    func confirmMessage(dict:Dictionary<String,String>){
+    public func confirmMessage(dict:Dictionary<String,String>){
         chatHub.invoke("confirmMessage", arguments: [dict])
     }
     
@@ -428,7 +428,7 @@ class MQHSwiftR: NSObject {
     message_token //   token,调用者随机生成 message_type //
     }
     */
-    func messageToUser(dict:Dictionary<String,String>){
+    public func messageToUser(dict:Dictionary<String,String>){
         chatHub.invoke("messageToUser", arguments: [dict])
     }
     
@@ -442,7 +442,7 @@ class MQHSwiftR: NSObject {
     before_message_id //在哪条消息之前,可选
     }
     */
-    func getHistoryMessages(dict:Dictionary<String,String>){
+    public func getHistoryMessages(dict:Dictionary<String,String>){
         chatHub.invoke("getHistoryMessages", arguments: [dict])
     }
     
@@ -454,7 +454,7 @@ class MQHSwiftR: NSObject {
     chat_session_id //聊天会话id
     }
     */
-    func getUnreadMessages(dict:Dictionary<String,String>){
+    public func getUnreadMessages(dict:Dictionary<String,String>){
         chatHub.invoke("getUnreadMessages", arguments: [dict])
     }
     
@@ -462,7 +462,7 @@ class MQHSwiftR: NSObject {
     /**
     获取用户会话列表
     */
-    func getChatSessionList(){
+    public func getChatSessionList(){
         chatHub.invoke("getChatSessionList", arguments: nil)
     }
     
@@ -474,7 +474,7 @@ class MQHSwiftR: NSObject {
     target_id //目标id chat_session_type //聊天会话类型 chat_session_id //聊天会话 id
     }
     */
-    func getTargetInfo(dict:Dictionary<String,String>){
+    public func getTargetInfo(dict:Dictionary<String,String>){
         chatHub.invoke("getTargetInfo", arguments: [dict])
     }
     
@@ -487,7 +487,7 @@ class MQHSwiftR: NSObject {
     
     :returns: 返回是否成功
     */
-    func externalLogin(token:String){
+    public func externalLogin(token:String){
         chatHub.invoke("externalLogin", arguments: [token])
     }
     
