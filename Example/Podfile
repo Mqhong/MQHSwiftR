@@ -6,7 +6,7 @@ target 'MQHSwiftR_Example', :exclusive => true do
 end
 
 target 'MQHSwiftR_Tests', :exclusive => true do
-  pod "MQHSwiftR", :path => "../"
+  pod "MQHSwiftR", :path => "MQHSwiftR/*.swift"
 
   pod 'Quick', '~> 0.8.0'
   pod 'Nimble', '3.0.0'

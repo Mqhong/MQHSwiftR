@@ -1,6 +1,0 @@
-framework module MQHSwiftR {
-  umbrella header "MQHSwiftR-umbrella.h"
-
-  export *
-  module * { export * }
-}

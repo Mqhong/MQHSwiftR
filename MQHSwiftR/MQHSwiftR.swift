@@ -158,8 +158,8 @@ public enum MQHSwiftRState{
 
 public class MQHSwiftR: NSObject {
 
+    public weak var delegate : MQHSwiftRDelegate?
     var MQHSwiftRDaostate:MQHSwiftRState!
-    weak var delegate : MQHSwiftRDelegate?
     var chatHub:Hub!
     var hubConnection:SignalR!
     /**
