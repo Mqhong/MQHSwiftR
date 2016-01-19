@@ -8,6 +8,6 @@
 
 import UIKit
 
-class UnreadMessagesModel: NSObject {
+public class UnreadMessagesModel: NSObject {
     var unread_messages:Array<MessageModel> = Array()
 }

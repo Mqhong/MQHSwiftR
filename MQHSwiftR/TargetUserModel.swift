@@ -8,7 +8,7 @@
 
 import UIKit
 
-class TargetUserModel: NSObject {
+public class TargetUserModel: NSObject {
     
     var chat_session_id:String?
     var target_id:String?

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserModel: NSObject {
+public class UserModel: NSObject {
     var login_msg:String?
     var login_result:String?
     var upload_token:String?

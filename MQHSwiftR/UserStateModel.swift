@@ -8,7 +8,7 @@
 
 import UIKit
 
-class UserStateModel: NSObject {
+public class UserStateModel: NSObject {
 //    "user_id" = 1;
 //    "user_name" = peterZ;
 //    "user_online_status" = 0;

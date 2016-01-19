@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SessionModel: NSObject {
+public class SessionModel: NSObject {
     var chat_session_id:String?
     var chat_session_type:String?
     var last_message:String?

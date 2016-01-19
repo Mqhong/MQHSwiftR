@@ -8,6 +8,6 @@
 
 import UIKit
 
-class SessionListModel: NSObject {
+public class SessionListModel: NSObject {
     var SessionList:Array<SessionModel> = Array()
 }
