@@ -10,14 +10,14 @@ import UIKit
 
 public class MessageModel: NSObject {
     
-    var chat_session_id:String?
-    var chat_session_type:String?
-    var sender_id:String?
-    var message_id:String?
-    var message:String?
-    var message_time:String?
-    var message_type:String?
-    var message_token:String?
+    public var chat_session_id:String?
+    public var chat_session_type:String?
+    public var sender_id:String?
+    public  var message_id:String?
+    public var message:String?
+    public var message_time:String?
+    public var message_type:String?
+    public var message_token:String?
     
     func MessageModelMethodWithDict(Dict dict:Dictionary<String,AnyObject>)->MessageModel{
         let model:MessageModel = MessageModel()
@@ -38,15 +38,15 @@ public class MessageModel: NSObject {
         var arr:Array<MessageModel> = Array()
         
         for dic in arrdict{
-        
-        var model:MessageModel = MessageModel()
             
-        model = model.MessageModelMethodWithDict(Dict: dic as! Dictionary<String, AnyObject>)
-
-        arr.append(model)
+            var model:MessageModel = MessageModel()
+            
+            model = model.MessageModelMethodWithDict(Dict: dic as! Dictionary<String, AnyObject>)
+            
+            arr.append(model)
         }
         return arr
-
+        
     }
     
     

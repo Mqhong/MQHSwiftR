@@ -9,7 +9,7 @@
 import UIKit
 
 public class HistoryMessageModel: NSObject {
-    var chat_session_id:String?
-    var history_messages:Array<MessageModel> = Array()
-    var unread_messages:Array<MessageModel> = Array()
+    public var chat_session_id:String?
+    public var history_messages:Array<MessageModel> = Array()
+    public var unread_messages:Array<MessageModel> = Array()
 }

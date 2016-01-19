@@ -10,10 +10,10 @@ import UIKit
 
 public class TargetUserModel: NSObject {
     
-    var chat_session_id:String?
-    var target_id:String?
-    var target_name:String?
-    var target_picture:String?
+   public var chat_session_id:String?
+   public var target_id:String?
+   public var target_name:String?
+   public var target_picture:String?
     
     func TargetUserModelMethod(Dict dict:Dictionary<String,AnyObject>)->TargetUserModel{
         let mmtargetmodel:TargetUserModel = TargetUserModel()

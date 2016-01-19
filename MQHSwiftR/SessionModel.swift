@@ -9,18 +9,18 @@
 import UIKit
 
 public class SessionModel: NSObject {
-    var chat_session_id:String?
-    var chat_session_type:String?
-    var last_message:String?
-    var last_message_id:String?
-    var last_message_time:String?
-    var last_message_type:String?
-    var last_sender_id:String?
-    var message_count:String?
-    var target_id:String?
-    var target_name:String?
-    var target_online_status:String?
-    var target_picture:String?
+   public var chat_session_id:String?
+   public var chat_session_type:String?
+   public var last_message:String?
+   public var last_message_id:String?
+   public var last_message_time:String?
+   public var last_message_type:String?
+   public var last_sender_id:String?
+   public var message_count:String?
+   public var target_id:String?
+   public var target_name:String?
+   public var target_online_status:String?
+   public var target_picture:String?
     
     func SessionListModelMethod(ArrDict arrDict:Array<AnyObject>)->Array<SessionModel>{
         var arr:Array<SessionModel> = Array()

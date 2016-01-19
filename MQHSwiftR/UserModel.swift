@@ -9,12 +9,12 @@
 import UIKit
 
 public class UserModel: NSObject {
-    var login_msg:String?
-    var login_result:String?
-    var upload_token:String?
-    var user_id:String?
-    var user_name:String?
-    var user_picture:String?
+   public var login_msg:String?
+   public var login_result:String?
+   public var upload_token:String?
+   public var user_id:String?
+   public var user_name:String?
+   public var user_picture:String?
 //    var text:String?
     
     func UserModelMethod(Dict dict:Dictionary<String,AnyObject>)->UserModel{

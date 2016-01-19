@@ -9,5 +9,5 @@
 import UIKit
 
 public class UnreadMessagesModel: NSObject {
-    var unread_messages:Array<MessageModel> = Array()
+   public var unread_messages:Array<MessageModel> = Array()
 }

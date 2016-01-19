@@ -13,10 +13,10 @@ public class UserStateModel: NSObject {
 //    "user_name" = peterZ;
 //    "user_online_status" = 0;
 //    "user_picture" = hah;
-    var user_id:String?
-    var user_name:String?
-    var user_online_status:String?
-    var user_picture:String?
+   public var user_id:String?
+   public var user_name:String?
+   public var user_online_status:String?
+   public var user_picture:String?
     
     func UserStateModelMethodWithDict(Dict dict:Dictionary<String,AnyObject>)->UserStateModel{
         
