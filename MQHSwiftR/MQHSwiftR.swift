@@ -463,6 +463,7 @@ public class MQHSwiftR: NSObject {
     获取用户会话列表
     */
     public func getChatSessionList(){
+        print("ddd")
         chatHub.invoke("getChatSessionList", arguments: nil)
     }
     

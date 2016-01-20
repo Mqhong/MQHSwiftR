@@ -22,10 +22,17 @@ public class UserStateModel: NSObject {
         
         let userstatemodel = UserStateModel()
         
-        userstatemodel.user_id =  String(dict["user_id"])
-        userstatemodel.user_name = String(dict["user_name"])
-        userstatemodel.user_online_status = String(dict["user_online_status"])
-        userstatemodel.user_picture = String(dict["user_picture"])
+        let user_id = dict["user_id"]!
+        userstatemodel.user_id =  String(user_id)
+        
+        let user_name = dict["user_name"]!
+        userstatemodel.user_name = String(user_name)
+        
+        let user_online_status = dict["user_online_status"]!
+        userstatemodel.user_online_status = String(user_online_status)
+        
+        let user_picture = dict["user_picture"]!
+        userstatemodel.user_picture = String(user_picture)
         
         return userstatemodel
     }

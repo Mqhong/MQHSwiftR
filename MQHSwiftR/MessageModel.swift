@@ -23,10 +23,14 @@ public class MessageModel: NSObject {
         let model:MessageModel = MessageModel()
         model.chat_session_id = dict["chat_session_id"] as? String
         model.chat_session_type = String(dict["chat_session_type"]!)
-        model.message = dict["message"] as? String
+        
+        let message = dict["message"]!
+        model.message =  String(message)
         model.message_id = dict["message_id"] as? String
         model.message_time = String(dict["message_time"]!)
-        model.message_token = String(dict["message_token"])
+        
+        let message_token = dict["message_token"]!
+        model.message_token = String(message_token)
         model.message_type = String(dict["message_type"]!)
         model.sender_id = dict["sender_id"] as? String
         return model
