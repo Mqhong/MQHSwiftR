@@ -257,7 +257,7 @@ public class MQHSwiftR: NSObject {
                 
                 print(historyMessageses)
                 
-                self?.delegate?.MQHSwiftR_ReceiveUnreadMessages!(historyMessageses)
+                self?.delegate?.MQHSwiftR_ReceiveHistoryMessages!(historyMessageses)
             })
             
             //MARK:监听发送消息的回调

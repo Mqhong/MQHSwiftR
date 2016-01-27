@@ -190,7 +190,7 @@ public class SignalR: NSObject, SwiftRWebDelegate {
             wkWebView.navigationDelegate = self
             
             let html = "<!doctype html><html><head></head><body>"
-                + "\(jqueryInclude)\(signalRInclude)\(jsInclude))"
+                + "\(jqueryInclude)\(signalRInclude)\(jsInclude)"
                 + "</body></html>"
             
             wkWebView.loadHTMLString(html, baseURL: bundle.bundleURL)
@@ -201,7 +201,7 @@ public class SignalR: NSObject, SwiftRWebDelegate {
             let jsInclude = "<script src='\(jsURL.absoluteString)'></script>"
             
             let html = "<!doctype html><html><head></head><body>"
-                + "\(jqueryInclude)\(signalRInclude)\(jsInclude))"
+                + "\(jqueryInclude)\(signalRInclude)\(jsInclude)"
                 + "</body></html>"
             
             webView = SwiftRWebView()
@@ -430,7 +430,9 @@ public class Hub {
         
         let doneJS = "function() { postMessage({ message: 'invokeHandler', hub: '\(name.lowercaseString)', id: '\(uuid)', result: arguments[0] }); }"
         let failJS = "function() { postMessage({ message: 'invokeHandler', hub: '\(name.lowercaseString)', id: '\(uuid)', error: processError(arguments[0]) }); }"
-        let js = "swiftR.hubs.\(name).invoke('\(method)', \(args)).done(\(doneJS)).fail(\(failJS))"
+        let js = args.isEmpty
+            ? "ensureHub('\(name)').invoke('\(method)').done(\(doneJS)).fail(\(failJS))"
+            : "ensureHub('\(name)').invoke('\(method)', \(args)).done(\(doneJS)).fail(\(failJS))"
         
         connection.runJavaScript(js)
     }

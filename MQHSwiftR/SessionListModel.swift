@@ -9,5 +9,5 @@
 import UIKit
 
 public class SessionListModel: NSObject {
-   public var SessionList:Array<SessionModel> = Array()
+   public var SessionList: Array<SessionModel> = Array()
 }
