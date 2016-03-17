@@ -4,7 +4,7 @@ PODS:
   - FBSnapshotTestCase/Core (2.0.7)
   - FBSnapshotTestCase/SwiftSupport (2.0.7):
     - FBSnapshotTestCase/Core
-  - MQHSwiftR (0.1.7):
+  - MQHSwiftR (0.1.8):
     - SwiftR
   - Nimble (3.0.0)
   - Nimble-Snapshots (3.0.0):
@@ -27,7 +27,7 @@ EXTERNAL SOURCES:
 
 SPEC CHECKSUMS:
   FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
-  MQHSwiftR: 33bc48191501d1877c6772dacf649b1f4cb61f6d
+  MQHSwiftR: ec6f409a5ac35af1380a01b934d424896bb81d26
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
   Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab

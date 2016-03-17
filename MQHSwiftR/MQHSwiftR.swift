@@ -147,8 +147,6 @@ import SwiftR
 
 
 
-
-
 public enum MQHSwiftRState{
     case Connecting
     case Connected
@@ -162,6 +160,13 @@ public class MQHSwiftR: NSObject {
     var MQHSwiftRDaostate:MQHSwiftRState!
     var chatHub:Hub!
     var hubConnection:SignalR!
+    
+    
+    //通知的名称
+    let Knotice_receiveMessage:String = "receiveMessage"//接收到消息的通知
+    
+    
+    
     /**
      初始化连接池，并监听回调
      */
@@ -170,10 +175,10 @@ public class MQHSwiftR: NSObject {
         hubConnection = SwiftR.connect(urlStr) { [weak self] connection in
             
             self?.chatHub = connection.createHubProxy("chatHub")
-            
+
             //MARK:监听loginCallback方法
             self?.chatHub.on("loginCallback", callback: { (args) -> () in
-                print("接收到loginCallback回调方法")
+//                print("接收到loginCallback回调方法")
                 
                 var user:UserModel = UserModel()
                 
@@ -229,7 +234,7 @@ public class MQHSwiftR: NSObject {
                 
                 unreadMessages.unread_messages = arr;
                 
-                print("arr:\(unreadMessages)")
+//                print("arr:\(unreadMessages)")
                 
                 self?.delegate?.MQHSwiftR_ReceiveUnreadMessages!(unreadMessages)
             })
@@ -265,14 +270,18 @@ public class MQHSwiftR: NSObject {
                 
                 print("接收到发送消息的回调")
                 
-                
                 let Dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
                 
                 var messagemodel = MessageModel()
                 
                 messagemodel = messagemodel.MessageModelMethodWithDict(Dict: Dict)
                 
-                self?.delegate?.MQHSwiftR_MessageCallback!(messagemodel)
+                
+                
+                //MARK:发送一个通知---发送消息的回调
+                NSNotificationCenter.defaultCenter().postNotificationName("SendMessageCallBack", object: messagemodel)
+                
+//                self?.delegate?.MQHSwiftR_MessageCallback!(messagemodel)
                 
             })
             
@@ -287,14 +296,17 @@ public class MQHSwiftR: NSObject {
                 
                 messagemodel = messagemodel.MessageModelMethodWithDict(Dict: Dict)
                 
-                self?.delegate?.MQHSwiftR_ReceiveMessage!(messagemodel)
+//                self?.delegate?.MQHSwiftR_ReceiveMessage!(messagemodel)
+                
+                //MARK:发送一个通知---接收消息的通知
+                NSNotificationCenter.defaultCenter().postNotificationName("receiveMessage", object: messagemodel)
                 
             })
             
             //MARK:监听聊天用户(对方)在线状态
             self?.chatHub.on("chatUserStatusChanged", callback: { (args) -> () in
                 
-                print("接收到对方在线状态")
+//                print("接收到对方在线状态")
                 
                 var userstatemodel = UserStateModel()
                 
@@ -317,9 +329,9 @@ public class MQHSwiftR: NSObject {
             
             connection.reconnecting = { [weak self] in
                 print("Reconnecting...")
-                self!.MQHSwiftRDaostate = MQHSwiftRState.Connecting
-                print("MQHSwiftRstate:\(self!.MQHSwiftRDaostate)")
-                self!.delegate?.BreakOrConnectTheConnection!(String(self!.hubConnection.state))
+//                self!.MQHSwiftRDaostate = MQHSwiftRState.Connecting
+//                print("MQHSwiftRstate:\(self!.MQHSwiftRDaostate)")
+//                self!.delegate?.BreakOrConnectTheConnection!(String(self!.hubConnection.state))
             }
             
             connection.connected = { [weak self] in
@@ -463,7 +475,7 @@ public class MQHSwiftR: NSObject {
     获取用户会话列表
     */
     public func getChatSessionList(){
-        print("ddd")
+//        print("ddd")
         chatHub.invoke("getChatSessionList", arguments: nil)
     }
     

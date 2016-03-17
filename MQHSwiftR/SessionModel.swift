@@ -26,8 +26,8 @@ public class SessionModel: NSObject {
         var arr:Array<SessionModel> = Array()
         for dic in arrDict{
             let model:SessionModel = SessionModel()
-            model.chat_session_id = dic["chat_session_id"] as? String
             
+            model.chat_session_id = dic["chat_session_id"] as? String
             
             let chat_session_type = dic["chat_session_type"]!
             model.chat_session_type = String(chat_session_type!)
@@ -46,12 +46,15 @@ public class SessionModel: NSObject {
             let message_count = dic["message_count"]!
             model.message_count = String(message_count!)
             model.target_id = dic["target_id"] as? String
+            
             model.target_name = dic["target_name"] as? String
             
             let target_online_status = dic["target_online_status"]!
             model.target_online_status = String(target_online_status!)
-            model.target_picture = dic["target_picture"] as? String
-            model.target_name = dic["target_name"] as? String
+            
+            let target_picture = dic["target_picture"]!
+            model.target_picture =  String(target_picture!)
+            
             arr.append(model)
         }
         return arr

@@ -1,6 +1,6 @@
 {
   "name": "MQHSwiftR",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "summary": "A  MQHSwiftR.",
   "homepage": "https://github.com/Mqhong/MQHSwiftR",
   "license": "MIT",
@@ -9,7 +9,7 @@
   },
   "source": {
     "git": "https://github.com/Mqhong/MQHSwiftR.git",
-    "tag": "0.1.7"
+    "tag": "0.1.8"
   },
   "platforms": {
     "ios": "8.0"
