@@ -329,9 +329,9 @@ public class MQHSwiftR: NSObject {
             
             connection.reconnecting = { [weak self] in
                 print("Reconnecting...")
-//                self!.MQHSwiftRDaostate = MQHSwiftRState.Connecting
-//                print("MQHSwiftRstate:\(self!.MQHSwiftRDaostate)")
-//                self!.delegate?.BreakOrConnectTheConnection!(String(self!.hubConnection.state))
+                self!.MQHSwiftRDaostate = MQHSwiftRState.Connecting
+                print("MQHSwiftRstate:\(self!.MQHSwiftRDaostate)")
+                self!.delegate?.BreakOrConnectTheConnection!(String(self!.hubConnection.state))
             }
             
             connection.connected = { [weak self] in
