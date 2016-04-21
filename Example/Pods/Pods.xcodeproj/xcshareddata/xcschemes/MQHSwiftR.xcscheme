@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E96BE59E6359EE72CBEB5A7E'
+               BlueprintIdentifier = 'A3FC1DAB8AF1E423CBA58EBF'
                BlueprintName = 'MQHSwiftR'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'MQHSwiftR.framework'>

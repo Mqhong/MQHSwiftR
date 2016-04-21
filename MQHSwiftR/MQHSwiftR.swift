@@ -318,7 +318,7 @@ public class MQHSwiftR: NSObject {
                     
                     dict = (argsDic["0"] as? Dictionary<String,AnyObject>)!
                     
-                }else if let argsArray:[AnyObject]? = args as? [AnyObject]{
+                }else if let argsArray:[AnyObject]? = args as? [AnyObject]? {
                     dict = (argsArray![0] as? Dictionary)!
 
                 }
