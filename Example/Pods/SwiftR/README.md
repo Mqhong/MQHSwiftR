@@ -1,6 +1,18 @@
 # SwiftR
 A Swift client for SignalR. Supports hubs and persistent connections.
 
+### Important!
+
+Version 0.10.0 includes a breaking change. Callback parameters are now passed as `[AnyObject]` instead of `AnyObject`. Named parameters in callbacks are no longer supported.
+
+```swift
+myHub.on("someMessage") { args in
+    let foo = args!["0"] as! String // No longer works!
+    let foo = args!["bar"] as! String // No longer works!
+    let foo = args![0] as! String // Works!
+}
+```
+
 ### How does it work?
 
 It's a wrapper around the SignalR JavaScript client running in a hidden web view. As such, it's subject to the same limitations of that client -- namely, no support for custom headers when using WebSockets. This is because the browser's WebSocket client does not support custom headers.
@@ -19,6 +31,23 @@ Also when using WKWebView, make sure to enable CORS on your server:
 ```csharp
 // Server
 app.UseCors (CorsOptions.AllowAll);
+
+// See my SignalRApplication repo for a CORS example with ASP.NET Core.
+```
+
+### What versions of SignalR are supported?
+
+SwiftR supports SignalR version 2.x. Version 2.2.0 is assumed by default. To change the SignalR version:
+
+```swift
+SwiftR.signalRVersion = .v2_2_0
+//SwiftR.signalRVersion = .v2_1_2
+//SwiftR.signalRVersion = .v2_1_1
+//SwiftR.signalRVersion = .v2_1_0
+//SwiftR.signalRVersion = .v2_0_3
+//SwiftR.signalRVersion = .v2_0_2
+//SwiftR.signalRVersion = .v2_0_1
+//SwiftR.signalRVersion = .v2_0_0
 ```
 
 ### Installation
@@ -36,7 +65,7 @@ github 'adamhartford/SwiftR'
 
 ### Server Example
 
-See https://github.com/adamhartford/SignalRDemo for a sample self-hosted SignalR application.
+See https://github.com/adamhartford/SignalRDemo for a sample self-hosted SignalR application. Or, https://github.com/adamhartford/SignalRApplication for an ASP.NET 5 version.
 
 ### Simple Example (Hub)
 
@@ -59,8 +88,8 @@ SwiftR.connect("http://localhost:8080") { connection in
   
     // Event handler
     simpleHub.on("notifySimple") { args in
-        let message = args!["0"] as! String
-        let detail = args!["1"] as! String
+        let message = args![0] as! String
+        let detail = args![1] as! String
         print("Message: \(message)\nDetail: \(detail)")
     }
 }
@@ -79,21 +108,6 @@ simpleHub.invoke("sendSimple", arguments: ["Simple Test", "This is a simple mess
         if let r = result {
             print("Result: \(r)")
         }
-    }
-}
-```
-Custom parameter names in callback response:
-
-```swift
-// Client
-SwiftR.connect("http://localhost:8080") { connection in
-    let simpleHub = connection.createHubProxy("simpleHub")
-  
-    // Event handler
-    simpleHub.on("notifySimple", parameters: ["message", "detail"]) { args in
-        let message = args!["message"] as! String
-        let detail = args!["detail"] as! String
-        print("Message: \(message)\nDetail: \(detail)")
     }
 }
 ```
@@ -128,7 +142,7 @@ SwiftR.connect("http://localhost:8080") { [weak self] connection in
     self?.complexHub = connection.createHubProxy("complexHub")
     
     self?.complexHub.on("notifyComplex") { args in
-        let m: AnyObject = args!["0"] as AnyObject!
+        let m: AnyObject = args![0] as AnyObject!
         print(m)
     }
 }
@@ -233,8 +247,8 @@ myConnection = SwiftR.connect("http://localhost:8080") { connection in
   
     // Event handler
     simpleHub.on("notifySimple") { args in
-        let message = args!["0"] as! String
-        let detail = args!["1"] as! String
+        let message = args![0] as! String
+        let detail = args![1] as! String
         print("Message: \(message)\nDetail: \(detail)")
     }
 }

@@ -17,11 +17,15 @@ public class TargetUserModel: NSObject {
     
     func TargetUserModelMethod(Dict dict:Dictionary<String,AnyObject>)->TargetUserModel{
         let mmtargetmodel:TargetUserModel = TargetUserModel()
-        mmtargetmodel.chat_session_id = dict["chat_session_id"] as? String
-        mmtargetmodel.target_id = dict["target_id"] as? String
-        mmtargetmodel.target_name = dict["target_name"] as? String
-        mmtargetmodel.target_picture = dict["target_picture"] as? String
+        mmtargetmodel.chat_session_id = self.Diction_Str(dict, keystr: "chat_session_id")
+        mmtargetmodel.target_id = self.Diction_Str(dict, keystr: "target_id")
+        mmtargetmodel.target_name = self.Diction_Str(dict, keystr: "target_name")
+        mmtargetmodel.target_picture = self.Diction_Str(dict, keystr: "target_picture")
         return mmtargetmodel
-        
+    }
+    
+    private func Diction_Str(dict:AnyObject,keystr:String)->String{
+        let str = dict[keystr]!
+        return String(str!)
     }
 }

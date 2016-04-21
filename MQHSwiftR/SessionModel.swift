@@ -27,36 +27,37 @@ public class SessionModel: NSObject {
         for dic in arrDict{
             let model:SessionModel = SessionModel()
             
-            model.chat_session_id = dic["chat_session_id"] as? String
+            model.chat_session_id = self.Diction_Str(dic, keystr: "chat_session_id")
             
-            let chat_session_type = dic["chat_session_type"]!
-            model.chat_session_type = String(chat_session_type!)
+            model.chat_session_type = self.Diction_Str(dic, keystr: "chat_session_type")
+    
+            model.last_message =  self.Diction_Str(dic, keystr: "last_message")
             
-            model.last_message = dic["last_message"] as? String
+            model.last_message_id = self.Diction_Str(dic, keystr: "last_message_id")
+
+            model.last_message_time = self.Diction_Str(dic, keystr: "last_message_time")
             
-            model.last_message_id = dic["last_message_id"] as? String
-            let last_message_time = dic["last_message_time"]!
-            model.last_message_time = String("\(last_message_time!)")
+            model.last_message_type = self.Diction_Str(dic, keystr: "last_message_type")
             
-            let last_message_type = dic["last_message_type"]!
-            model.last_message_type = String(last_message_type!)
-            model.last_sender_id = dic["last_sender_id"] as? String
+            model.last_sender_id = self.Diction_Str(dic, keystr: "last_sender_id")
             
+            model.message_count = self.Diction_Str(dic, keystr: "message_count")
             
-            let message_count = dic["message_count"]!
-            model.message_count = String(message_count!)
-            model.target_id = dic["target_id"] as? String
+            model.target_id = self.Diction_Str(dic, keystr: "target_id")
             
-            model.target_name = dic["target_name"] as? String
+            model.target_name = self.Diction_Str(dic, keystr: "target_name")
             
-            let target_online_status = dic["target_online_status"]!
-            model.target_online_status = String(target_online_status!)
+            model.target_online_status =  self.Diction_Str(dic, keystr: "target_online_status")
             
-            let target_picture = dic["target_picture"]!
-            model.target_picture =  String(target_picture!)
+            model.target_picture = self.Diction_Str(dic, keystr: "target_picture")
             
             arr.append(model)
         }
         return arr
+    }
+    
+    private func Diction_Str(dict:AnyObject,keystr:String)->String{
+        let str = dict[keystr]!
+        return String(str!)
     }
 }

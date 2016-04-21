@@ -161,10 +161,8 @@ public class MQHSwiftR: NSObject {
     var chatHub:Hub!
     var hubConnection:SignalR!
     
-    
     //通知的名称
     let Knotice_receiveMessage:String = "receiveMessage"//接收到消息的通知
-    
     
     
     /**
@@ -182,7 +180,7 @@ public class MQHSwiftR: NSObject {
                 
                 var user:UserModel = UserModel()
                 
-                let dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
+                let dict:Dictionary<String,AnyObject>! = self?.AnyObject_Dict(args!)
                 
                 user = user.UserModelMethod(Dict: dict)
                 
@@ -196,7 +194,7 @@ public class MQHSwiftR: NSObject {
                 
                 var mmtargetmodel:TargetUserModel = TargetUserModel()
                 
-                let dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
+                let dict:Dictionary<String,AnyObject>! = self?.AnyObject_Dict(args!)
                 
                 mmtargetmodel =  mmtargetmodel.TargetUserModelMethod(Dict: dict)
                 
@@ -207,7 +205,7 @@ public class MQHSwiftR: NSObject {
             self?.chatHub.on("receiveChatSessionList", callback: { (args) -> () in
                 print("接收到用户会话列表")
                 
-                let Arrdict:Array<AnyObject>! = args?["0"] as? Array
+                let Arrdict:Array<AnyObject>! = self?.AnyObject_Arry(args!)
                 
                 let sessionlistmodel = SessionListModel()
                 
@@ -224,7 +222,7 @@ public class MQHSwiftR: NSObject {
             self?.chatHub.on("receiveUnreadMessages", callback: { (args) -> () in
                 print("接收到用户未读消息")
                 
-                let ArrDict:Array<AnyObject>! = args?["0"] as? Array
+                let ArrDict:Array<AnyObject>! = self?.AnyObject_Arry(args!)
                 
                 let message = MessageModel()
                 
@@ -234,8 +232,6 @@ public class MQHSwiftR: NSObject {
                 
                 unreadMessages.unread_messages = arr;
                 
-//                print("arr:\(unreadMessages)")
-                
                 self?.delegate?.MQHSwiftR_ReceiveUnreadMessages!(unreadMessages)
             })
             
@@ -243,8 +239,9 @@ public class MQHSwiftR: NSObject {
             self?.chatHub.on("receiveHistoryMessages", callback: { (args) -> () in
                 print("接收到历史消息")
                 
-                let TotelDict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
+//                let TotelDict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
                 
+                var TotelDict:Dictionary<String,AnyObject>  = (self?.AnyObject_Dict(args!))!
                 
                 let unread_messages:Array<AnyObject> = (TotelDict["unread_messages"] as? Array<AnyObject>)!
                 
@@ -265,23 +262,25 @@ public class MQHSwiftR: NSObject {
                 self?.delegate?.MQHSwiftR_ReceiveHistoryMessages!(historyMessageses)
             })
             
+            
+            
             //MARK:监听发送消息的回调
             self?.chatHub.on("messageCallback", callback: { (args) -> () in
                 
                 print("接收到发送消息的回调")
                 
-                let Dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
+                let dict:Dictionary<String,AnyObject> = (self?.AnyObject_Dict(args!))!
                 
                 var messagemodel = MessageModel()
                 
-                messagemodel = messagemodel.MessageModelMethodWithDict(Dict: Dict)
+                messagemodel = messagemodel.MessageModelMethodWithDict(Dict: dict)
                 
                 
                 
                 //MARK:发送一个通知---发送消息的回调
                 NSNotificationCenter.defaultCenter().postNotificationName("SendMessageCallBack", object: messagemodel)
                 
-//                self?.delegate?.MQHSwiftR_MessageCallback!(messagemodel)
+                self?.delegate?.MQHSwiftR_MessageCallback!(messagemodel)
                 
             })
             
@@ -290,11 +289,12 @@ public class MQHSwiftR: NSObject {
                 
                 print("接收到消息")
                 
-                let Dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
+                let dict:Dictionary<String,AnyObject> = (self?.AnyObject_Dict(args!))!
+                
                 
                 var messagemodel = MessageModel()
                 
-                messagemodel = messagemodel.MessageModelMethodWithDict(Dict: Dict)
+                messagemodel = messagemodel.MessageModelMethodWithDict(Dict: dict)
                 
 //                self?.delegate?.MQHSwiftR_ReceiveMessage!(messagemodel)
                 
@@ -310,9 +310,20 @@ public class MQHSwiftR: NSObject {
                 
                 var userstatemodel = UserStateModel()
                 
-                let Dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
+//                let Dict:Dictionary<String,AnyObject>! = args?["0"] as? Dictionary
                 
-                userstatemodel = userstatemodel.UserStateModelMethodWithDict(Dict: Dict)
+                var dict:Dictionary<String,AnyObject> = ["":""]
+                
+                if let argsDic:Dictionary<String,AnyObject> = args as? Dictionary<String,AnyObject>{
+                    
+                    dict = (argsDic["0"] as? Dictionary<String,AnyObject>)!
+                    
+                }else if let argsArray:[AnyObject]? = args as? [AnyObject]{
+                    dict = (argsArray![0] as? Dictionary)!
+
+                }
+                
+                userstatemodel = userstatemodel.UserStateModelMethodWithDict(Dict: dict)
                 
                 
                 self?.delegate?.MQHSwiftR_ChatUserStatusChanged!(userstatemodel)
@@ -503,6 +514,49 @@ public class MQHSwiftR: NSObject {
     public func externalLogin(token:String){
         chatHub.invoke("externalLogin", arguments: [token])
     }
+    
+    
+    /**
+     把服务器上的AnyObject字典转换成本地的字典
+     
+     :param: args 接收到的anyobject
+     
+     :returns: 返回固定格式的Dict
+     */
+    private func AnyObject_Dict(args:AnyObject)->Dictionary<String,AnyObject>{
+        
+        var dict:Dictionary<String,AnyObject> = ["":""]
+        
+//        print("是的，甜心，就该这么玩")
+        
+        if let argsDic:Dictionary<String,AnyObject> = args as? Dictionary<String,AnyObject>{
+            
+            dict = (argsDic["0"] as? Dictionary<String,AnyObject>)!
+
+        }else if let argsArray:[AnyObject]? = args as? [AnyObject]{
+            
+            dict = (argsArray![0] as? Dictionary)!
+            
+        }
+        return dict
+    }
+    
+    private func AnyObject_Arry(args:AnyObject)->Array<AnyObject>{
+        
+        print("是的，甜心，就该这么玩")
+        
+        var array:Array<AnyObject>! = []
+        
+        if let argsDic:Dictionary<String,AnyObject> = args as? Dictionary<String,AnyObject> {
+            
+            array = argsDic["0"] as? Array
+            
+        }else if let argsArray:[AnyObject]? = args as? [AnyObject] {
+            array = argsArray![0] as? Array
+        }
+        return array
+    }
+    
     
 }
 

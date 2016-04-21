@@ -1,18 +1,18 @@
 PODS:
-  - FBSnapshotTestCase (2.0.7):
-    - FBSnapshotTestCase/SwiftSupport (= 2.0.7)
-  - FBSnapshotTestCase/Core (2.0.7)
-  - FBSnapshotTestCase/SwiftSupport (2.0.7):
+  - FBSnapshotTestCase (2.1.0):
+    - FBSnapshotTestCase/SwiftSupport (= 2.1.0)
+  - FBSnapshotTestCase/Core (2.1.0)
+  - FBSnapshotTestCase/SwiftSupport (2.1.0):
     - FBSnapshotTestCase/Core
-  - MQHSwiftR (0.1.9):
+  - MQHSwiftR (0.2.0):
     - SwiftR
   - Nimble (3.0.0)
-  - Nimble-Snapshots (3.0.0):
-    - FBSnapshotTestCase (~> 2.0.7)
+  - Nimble-Snapshots (4.0.1):
+    - FBSnapshotTestCase (~> 2.0)
     - Nimble
     - Quick
   - Quick (0.8.0)
-  - SwiftR (0.9.0)
+  - SwiftR (0.10.3)
 
 DEPENDENCIES:
   - FBSnapshotTestCase
@@ -26,11 +26,11 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
-  FBSnapshotTestCase: 7e85180d0d141a0cf472352edda7e80d7eaeb547
-  MQHSwiftR: 9e5f572b39a356f1bc79dac8be6bee7cf38370cb
+  FBSnapshotTestCase: 366ecd378511d7716c79991cd8067d1eed23578d
+  MQHSwiftR: 614a38934e6fc3c450c1a7840e35843f75ca7866
   Nimble: 4c353d43735b38b545cbb4cb91504588eb5de926
-  Nimble-Snapshots: ab41dd737dcd33a0b0cb005a30465fef70b7207a
+  Nimble-Snapshots: 2d15a585b816f7d14947ed6e172218f9d0980ea8
   Quick: 563d0f6ec5f72e394645adb377708639b7dd38ab
-  SwiftR: dffdefd527acc01b60d5525488ae670cf98921ba
+  SwiftR: cd2232ec32c1c9ec4f3950d238aea7cf019485c0
 
 COCOAPODS: 0.39.0

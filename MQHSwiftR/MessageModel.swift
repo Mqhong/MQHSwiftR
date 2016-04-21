@@ -20,19 +20,25 @@ public class MessageModel: NSObject {
     public var message_token:String?
     
     func MessageModelMethodWithDict(Dict dict:Dictionary<String,AnyObject>)->MessageModel{
+        
         let model:MessageModel = MessageModel()
-        model.chat_session_id = dict["chat_session_id"] as? String
-        model.chat_session_type = String(dict["chat_session_type"]!)
         
-        let message = dict["message"]!
-        model.message =  String(message)
-        model.message_id = dict["message_id"] as? String
-        model.message_time = String(dict["message_time"]!)
+        model.chat_session_id = self.Diction_Str(dict, keystr: "chat_session_id")
         
-        let message_token = dict["message_token"]!
-        model.message_token = String(message_token)
-        model.message_type = String(dict["message_type"]!)
-        model.sender_id = dict["sender_id"] as? String
+        model.chat_session_type = self.Diction_Str(dict, keystr: "chat_session_type")
+        
+        model.message =  self.Diction_Str(dict, keystr: "message")
+        
+        model.message_id = self.Diction_Str(dict, keystr: "message_id")
+        
+        model.message_time = self.Diction_Str(dict, keystr: "message_time")
+        
+        model.message_token = self.Diction_Str(dict, keystr: "message_token")
+        
+        model.message_type = self.Diction_Str(dict, keystr: "message_type")
+        
+        model.sender_id = self.Diction_Str(dict, keystr: "sender_id")
+        
         return model
     }
     
@@ -53,5 +59,9 @@ public class MessageModel: NSObject {
         
     }
     
+    private func Diction_Str(dict:AnyObject,keystr:String)->String{
+        let str = dict[keystr]!
+        return String(str!)
+    }
     
 }

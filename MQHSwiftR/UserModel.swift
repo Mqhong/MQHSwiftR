@@ -20,16 +20,19 @@ public class UserModel: NSObject {
     func UserModelMethod(Dict dict:Dictionary<String,AnyObject>)->UserModel{
         
         let user:UserModel = UserModel()
-        user.login_result = String(dict["login_result"]!)
-        user.user_id =  dict["user_id"] as? String
-        user.user_picture = dict["user_picture"] as? String
-        user.login_msg = dict["login_msg"] as? String
-        user.user_name = dict["user_name"] as? String
-        user.upload_token = dict["upload_token"] as? String
-        
+        user.login_result = self.Diction_Str(dict, keystr: "login_result")
+        user.user_id =  self.Diction_Str(dict, keystr: "user_id")
+        user.user_picture =  self.Diction_Str(dict, keystr: "user_picture")
+        user.login_msg = self.Diction_Str(dict, keystr: "login_msg")
+        user.user_name = self.Diction_Str(dict, keystr: "user_name")
+        user.upload_token = self.Diction_Str(dict, keystr: "upload_token")
         return user
 
     }
     
+    private func Diction_Str(dict:AnyObject,keystr:String)->String{
+        let str = dict[keystr]!
+        return String(str!)
+    }
     
 }
